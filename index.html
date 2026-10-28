@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="An FSKTM IT Club student homepage: learn, build and connect."
+  >
+  <title>FSKTM IT Club | Big ideas start here.</title>
+
+  <style>
+    /* Include padding and borders within the declared widths. */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Theme colours */
+    :root {
+      --ink: #172b40;
+      --paper: #fffdf6;
+      --lilac: #dcd3ff;
+      --mint: #cceee0;
+      --yellow: #ffda68;
+      --muted: #4b5d69;
+    }
+
+    /* Page defaults and keyboard accessibility */
+    html {
+      scroll-padding-top: 20px;
+    }
+
+    body {
+      background: #f3f0e6;
+      color: var(--ink);
+      padding: 24px;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-underline-offset: 4px;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    a:focus-visible {
+      outline: 3px solid #7255bd;
+      outline-offset: 5px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .skip-link:focus {
+      left: 24px;
+      top: 5px;
+      background: white;
+      z-index: 5;
+    }
+
+    /* Required outer Flexbox layout */
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: 600px;
+      max-width: 1240px;
+      margin: auto;
+    }
+
+    .logo, .navigation, .content, .footer {
+      margin-top: 10px;
+    }
+
+    /* 1. Logo and header */
+    .logo {
+      min-height: 100px;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 22px 22px 6px 6px;
+    }
+
+    .brand-mark {
+      flex-shrink: 0;
+      width: 62px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--yellow);
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: 3px 3px 0 var(--ink);
+      transform: rotate(-6deg);
+      font: bold 28px monospace;
+    }
+
+    h1 {
+      font-size: clamp(24px, 4vw, 34px);
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .header-note {
+      margin-left: auto;
+      padding: 8px 15px;
+      font-size: 12px;
+      font-weight: bold;
+      background: var(--mint);
+      border: 1.5px solid var(--ink);
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+
+    /* 2. Navigation bar */
+    .navigation {
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--ink);
+      border-radius: 6px 6px 16px 16px;
+    }
+
+    .navigation a {
+      color: white;
+      padding: 6px 18px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .navigation a:hover, .navigation a:focus-visible {
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+    .nav-note {
+      margin-left: auto;
+      color: #dcd3ff;
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+
+    /* The remaining 10% is the space between the desktop columns. */
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      min-height: 400px;
+      padding-top: 12px;
+    }
+
+    /* 3. Sidebar */
+    .side-bar {
+      width: 20%;
+      min-height: 400px;
+      padding: 22px 18px;
+      background: var(--mint);
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      overflow-wrap: anywhere;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .side-bar h2 {
+      font-size: 21px;
+      margin: 8px 0 20px;
+    }
+
+    .side-bar ul {
+      list-style: none;
+    }
+
+    .side-bar li + li {
+      margin-top: 10px;
+    }
+
+    .side-bar a {
+      display: block;
+      padding: 11px 10px;
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .side-bar a:hover {
+      background: var(--yellow);
+    }
+
+    .side-bar a span {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .sticky-note {
+      margin-top: 30px;
+      padding: 18px 14px;
+      background: var(--yellow);
+      border: 1.5px solid var(--ink);
+      border-radius: 3px 3px 18px 3px;
+      transform: rotate(-2deg);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .sticky-note strong {
+      font-size: 18px;
+      line-height: 1.2;
+      display: block;
+    }
+
+    .sticky-note p {
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .side-footer {
+      margin-top: 32px;
+      font: bold 13px monospace;
+    }
+
+    /* 4. Main body and hero */
+    .body-area {
+      width: 70%;
+      min-height: 400px;
+      min-width: 0;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      padding: 30px;
+      overflow-wrap: anywhere;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--lilac);
+      padding: 4px 10px;
+      border: 1.5px solid var(--ink);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero h2 {
+      font-size: clamp(34px, 4.5vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -2px;
+      margin: 18px 0;
+    }
+
+    .hero h2 span {
+      background: linear-gradient(transparent 63%, #ffda68 63%);
+    }
+
+    .intro {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 350px;
+    }
+
+    .mascot {
+      width: 35%;
+      max-width: 240px;
+      flex-shrink: 0;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 10px 17px;
+      background: var(--yellow);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 4px 4px 0 var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      background: var(--lilac);
+    }
+
+    /* Main content sections */
+    .section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 2px dashed #d2d6ce;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -.5px;
+      margin-bottom: 12px;
+    }
+
+    .section p {
+      font-size: 14px;
+    }
+
+    p + p {
+      margin-top: 10px;
+    }
+
+    .section-label {
+      font: bold 11px monospace;
+      letter-spacing: 1px;
+      color: #65538d;
+      margin-bottom: 8px;
+    }
+
+    .activity {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid #d9dfd6;
+    }
+
+    .number {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1.5px solid var(--ink);
+      border-radius: 11px;
+      background: var(--lilac);
+      font: bold 16px monospace;
+    }
+
+    .activity:nth-of-type(2) .number {
+      background: var(--yellow);
+    }
+
+    .activity:nth-of-type(3) .number {
+      background: var(--mint);
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    .activity p, .section .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .resource-list {
+      list-style: none;
+    }
+
+    .resource-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #d9dfd6;
+    }
+
+    .resource-list a {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .contact {
+      padding: 22px;
+      border: 1.5px solid var(--ink);
+      border-radius: 14px;
+      background: var(--lilac);
+    }
+
+    /* 5. Footer */
+    .footer {
+      min-height: 20px;
+      padding: 18px 6px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .footer a {
+      font-weight: bold;
+    }
+
+    /* On mobile, stack the columns and wrap the menus. */
+    @media (max-width: 700px) {
+      body {
+        padding: 12px;
+      }
+
+      .logo {
+        padding: 20px 16px;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        width: 46px;
+        height: 46px;
+        font-size: 23px;
+      }
+
+      .brand-subtitle {
+        font-size: 10px;
+      }
+
+      .header-note, .nav-note {
+        display: none;
+      }
+
+      .navigation {
+        padding: 8px;
+        gap: 2px;
+      }
+
+      .navigation a {
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+
+      .content {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .side-bar, .body-area {
+        width: 100%;
+        min-height: auto;
+      }
+
+      .side-bar {
+        padding: 18px;
+      }
+
+      .side-bar h2 {
+        margin: 4px 0 12px;
+      }
+
+      .side-bar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .side-bar li {
+        flex: 1 1 110px;
+      }
+
+      .side-bar li + li {
+        margin-top: 0;
+      }
+
+      .side-bar a {
+        height: 100%;
+      }
+
+      .sticky-note {
+        margin-top: 18px;
+        transform: none;
+        padding: 14px;
+      }
+
+      .sticky-note strong {
+        font-size: 16px;
+      }
+
+      .sticky-note p {
+        margin-top: 5px;
+      }
+
+      .side-footer {
+        display: none;
+      }
+
+      .body-area {
+        padding: 24px 20px;
+      }
+
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero h2 {
+        font-size: clamp(38px, 10vw, 54px);
+      }
+
+      .mascot {
+        width: 65%;
+        max-width: 190px;
+        align-self: center;
+        margin-top: 18px;
+      }
+
+      .section h2 {
+        font-size: 22px;
+      }
+
+      .contact {
+        padding: 18px;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="container" id="top">
+    <!-- 1. Club logo and header -->
+    <header class="logo">
+      <div class="brand-mark" aria-hidden="true">&lt;/&gt;</div>
+
+      <div>
+        <h1>FSKTM IT Club</h1>
+        <p class="brand-subtitle">
+          Faculty of Computer Science &amp; Information Technology
+        </p>
+      </div>
+
+      <p class="header-note">Curiosity looks good on you.</p>
+    </header>
+
+    <!-- 2. Main navigation -->
+    <nav class="navigation" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#contact">Contact</a>
+      <span class="nav-note">Learn. Build. Connect.</span>
+    </nav>
+
+    <!-- 3. Two-column Flexbox content -->
+    <div class="content">
+      <!-- Sidebar shortcuts -->
+      <aside class="side-bar" aria-label="Club shortcuts">
+        <p class="eyebrow">Your launchpad</p>
+        <h2>Good things<br>start here.</h2>
+
+        <ul>
+          <li>
+            <a href="#events">
+              <span>01 / EXPLORE</span>
+              Activities &amp; workshops &rarr;
+            </a>
+          </li>
+          <li>
+            <a href="#resources">
+              <span>02 / LEARN</span>
+              Learning resources &rarr;
+            </a>
+          </li>
+          <li>
+            <a href="#contact">
+              <span>03 / CONNECT</span>
+              Get involved &rarr;
+            </a>
+          </li>
+        </ul>
+
+        <div class="sticky-note">
+          <strong>A little curious?<br>You're in the right place.</strong>
+          <p>
+            Bring an idea, ask a question, and learn with others.
+            No expert badge needed.
+          </p>
+        </div>
+
+        <p class="side-footer">&lt;hello, possibilities! /&gt;</p>
+      </aside>
+
+      <!-- Main body content -->
+      <main class="body-area" id="main-content">
+        <section class="hero" id="home">
+          <div class="hero-copy">
+            <p class="pill">For curious minds &amp; future makers</p>
+            <h2>Big ideas.<br>Small steps.<br><span>Let's build.</span></h2>
+            <p class="intro">
+              A little code. A lot of curiosity.
+              Explore technology beyond the classroom and turn your
+              next idea into something real.
+            </p>
+            <a class="button" href="#events">Find your next spark &rarr;</a>
+          </div>
+
+          <!-- Original inline SVG mascot; no image download is needed. -->
+          <svg
+            class="mascot"
+            viewBox="0 0 240 300"
+            role="img"
+            aria-labelledby="mascot-title"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title id="mascot-title">
+              A friendly robot building ideas on a laptop
+            </title>
+            <g stroke="#172b40" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M29 94C3 154 22 246 96 261C180 282 225 231 221 160C220 90 156 44 93 64Z"
+                fill="#dcd3ff"
+                stroke="none"
+              />
+              <path d="M189 28L194 41L208 46L194 51L189 65L184 51L171 46L184 41Z" fill="#ffda68"/>
+              <path d="M31 49V65M23 57H39M212 112V124M206 118H218" fill="none"/>
+              <path d="M117 91V73" fill="none"/>
+              <circle cx="117" cy="66" r="8" fill="#ffda68"/>
+              <rect x="60" y="91" width="117" height="90" rx="28" fill="#fffdf6"/>
+              <rect x="48" y="120" width="12" height="29" rx="6" fill="#cceee0"/>
+              <rect x="177" y="120" width="12" height="29" rx="6" fill="#cceee0"/>
+              <rect x="76" y="111" width="85" height="46" rx="17" fill="#172b40"/>
+              <path
+                d="M91 130Q97 119 103 130M133 130Q139 119 145 130"
+                stroke="#cceee0"
+                fill="none"
+              />
+              <path d="M111 141Q118 148 125 141" stroke="#ffda68" fill="none"/>
+              <path d="M85 182Q66 191 67 220H172Q173 191 153 182" fill="#cceee0"/>
+              <path
+                d="M67 194Q41 176 33 154M174 195Q201 175 198 151"
+                fill="none"
+                stroke-width="12"
+              />
+              <path d="M23 141L33 154L41 140M190 138L198 151L209 141" fill="none"/>
+              <path d="M62 206H176L164 253H74Z" fill="#ffda68"/>
+              <path d="M54 254H184L177 264H61Z" fill="#fffdf6"/>
+              <path
+                d="M106 221L99 228L106 235M132 221L139 228L132 235M124 219L116 237"
+                fill="none"
+              />
+              <path d="M25 244L30 254L41 257L30 261L25 272L21 261L10 257L21 254Z" fill="#cceee0"/>
+              <path d="M192 223L203 216M199 235L214 234" fill="none"/>
+            </g>
+          </svg>
+        </section>
+
+        <section class="section" id="about">
+          <p class="section-label">01 / THE IDEA</p>
+          <h2>Better together. Byte by byte.</h2>
+          <p>
+            This FSKTM IT Club homepage is a starting point for students
+            interested in coding, web design, and creative problem-solving.
+            Beginners can explore the basics while experienced students
+            can share techniques and develop new project ideas.
+          </p>
+          <p>
+            The idea is simple: make something small, exchange feedback,
+            and improve it together. You do not need to know everything
+            before you start. Curiosity is a pretty good first step.
+          </p>
+        </section>
+
+        <section class="section" id="events">
+          <p class="section-label">02 / MAKE SOMETHING</p>
+          <h2>A few ways to find your spark.</h2>
+          <p class="small">
+            Proposed activities for this student project;
+            these are not confirmed event announcements.
+          </p>
+
+          <article class="activity">
+            <span class="number" aria-hidden="true">01</span>
+            <div>
+              <h3>Web design workshop</h3>
+              <p>
+                Turn a blank page into a responsive website
+                with HTML and CSS Flexbox.
+              </p>
+            </div>
+          </article>
+
+          <article class="activity">
+            <span class="number" aria-hidden="true">02</span>
+            <div>
+              <h3>Peer coding circle</h3>
+              <p>
+                Untangle a programming problem, swap ideas,
+                and learn a new approach.
+              </p>
+            </div>
+          </article>
+
+          <article class="activity">
+            <span class="number" aria-hidden="true">03</span>
+            <div>
+              <h3>Mini project showcase</h3>
+              <p>
+                Show what you made. Get useful feedback.
+                Discover what to try next.
+              </p>
+            </div>
+          </article>
+        </section>
+
+        <section class="section" id="resources">
+          <p class="section-label">03 / YOUR TOOLKIT</p>
+          <h2>A head start for your next idea.</h2>
+          <ul class="resource-list">
+            <li>
+              <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development">
+                MDN &middot; Learn web development &nearr;
+              </a>
+            </li>
+            <li>
+              <a href="https://www.w3schools.com/css/css3_flexbox.asp">
+                W3Schools &middot; Get to know Flexbox &nearr;
+              </a>
+            </li>
+            <li>
+              <a href="https://skills.github.com/">
+                GitHub Skills &middot; Practise Git &amp; GitHub &nearr;
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="section contact" id="contact">
+          <p class="section-label">04 / SAY HELLO</p>
+          <h2>Your next idea could start a conversation.</h2>
+          <p>
+            Have a workshop suggestion or a project in mind?
+            Contact student author <strong>Abdirahman Abdinor Ali</strong>
+            through the course platform, Author.
+          </p>
+          <p class="small">
+            Academic demonstration page. Official club contact details
+            and event dates have not been provided.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <!-- 4. Page footer -->
+    <footer class="footer">
+      <p>&copy; 2026 FSKTM IT Club &middot; Student web design project</p>
+      <a href="#top">Back to the top &uarr;</a>
+    </footer>
+  </div>
+</body>
+</html>
